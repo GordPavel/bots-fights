@@ -1,0 +1,5 @@
+rootProject.name = 'bots-fights'
+
+include ':mediator',
+        ':stub-game-service',
+        ':common'

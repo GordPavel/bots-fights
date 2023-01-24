@@ -1,0 +1,14 @@
+java:
+  location: /Library/Java/JavaVirtualMachines/graalvm-ce-java17-22.3.0/Contents/Home/bin/java
+  configs: -Xms50M -Xmx100M -Xmn30M -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=10M -XX:ReservedCodeCacheSize=50M -Xss1M -XX:ActiveProcessorCount=2 -Dfile.encoding=UTF-8 -Duser.country=RU -Duser.language=ru -XX:+UseG1GC -XX:+AlwaysActAsServerClassMachine
+  spring: -Dserver.port=%d -Dturn.figure=%s -Dmanagement.endpoints.web.base-path=/system -Dmanagement.endpoint.health.probes.enabled=true
+
+game:
+  turn.delay: PT0.1S
+#  field.size: 19
+  field.size: 5
+
+logging:
+  level:
+    Left.logger: DEBUG
+    Right.logger: DEBUG

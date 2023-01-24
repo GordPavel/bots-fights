@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  users-service:
+    image: 'users-service:0.0.1-SNAPSHOT'
+    depends_on:
+      - db
+    links:
+      - "db:database"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 512M
+    environment:
+      - JAVA_OPTS=-Xms50M -Xmx100M -Xmn30M -XX:MaxMetaspaceSize=100M -XX:MaxDirectMemorySize=10M -XX:ReservedCodeCacheSize=50M -Xss1M -XX:ActiveProcessorCount=2 -Dfile.encoding=UTF-8 -Duser.country=RU -Duser.language=ru -XX:+UseG1GC -XX:+AlwaysActAsServerClassMachine
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bots_fights?currentSchema=app
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=password
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=bots_fights
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
